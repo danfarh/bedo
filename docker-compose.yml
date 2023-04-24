@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  build:
+    build: .
+    container_name: spark-nodejs
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    links:
+      - redis
+      - mongo
+    volumes:
+      - '/root/spark-public-data:/usr/src/spark-nodejs/build/public'
+
+  redis:
+    image: redis
+    volumes:
+      - '/root/db-data/redis:/data'
+    container_name: redis
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - '/root/db-data/mongo:/data/db'
+    container_name: mongo
+    restart: unless-stopped
+

@@ -1,0 +1,29 @@
+stages:
+  - stage-deploy
+  - live-deploy
+
+stage_deploy:
+  stage: stage-deploy
+  only:
+    - dev
+  tags:
+    - stage
+  script:
+    - docker-compose stop || true
+    - docker-compose build
+    - docker-compose up -d
+  after_script:
+    - docker exec spark-nodejs node copyStatics.js
+
+live_deploy:
+  stage: live-deploy
+  only:
+    - release
+  tags:
+    - live
+  script:
+    - docker-compose stop || true
+    - docker-compose build
+    - docker-compose up -d
+  after_script:
+    - docker exec spark-nodejs node copyStatics.js

@@ -1,0 +1,7 @@
+/node_modules
+.env
+Spark.code-workspace
+package.json
+package-lock.json
+tsconfig.json
+/build

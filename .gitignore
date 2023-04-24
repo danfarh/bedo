@@ -1,0 +1,13 @@
+/node_modules
+.env
+Spark.code-workspace
+/.idea
+.vscode/
+/build
+public/staticMaps/**/*
+playground.ts
+playground.js
+public/files/**/*
+env
+
+env
